@@ -11,4 +11,16 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do 
+    
+    def logged_in?
+      !!current_runner
+    end
+    
+    def current_runner
+      @current_runner ||= Runner.find_by_id(session[:runner_id]) if session[:runner_id]
+    end 
+    
+  end 
+
 end
